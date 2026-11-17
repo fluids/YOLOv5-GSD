@@ -5,7 +5,9 @@ This guide provides CPU and GPU installation options using the following example
 - **Option A:** Intel Core i9 CPU on Ubuntu 20.04.
 - **Option B:** NVIDIA H100 GPU on Rocky Linux 9.5.
 
-Other Linux systems may require adjustments to package versions. Install Anaconda or Miniconda, Git, and Git LFS before proceeding.
+Other Linux systems may require adjustments to package versions. Install Anaconda or Miniconda and Git before proceeding.
+
+Model weights download automatically if they are missing locally. Git LFS is not required.
 
 ## Step 0: Open a terminal
 
@@ -37,16 +39,18 @@ Activate this environment whenever you open a new terminal to use YOLOv5.
 
 ## Step 3: Download the repository
 
-Clone the custom repository and download the pretrained model weights through Git LFS.
+Clone the customized [YOLOv5-GSD repository](https://github.com/fluids/YOLOv5-GSD):
 
 ```bash
-git lfs install
-git clone https://github.com/fluids/yolov5.git
-cd yolov5
-git lfs pull
+git clone https://github.com/fluids/YOLOv5-GSD.git
+cd YOLOv5-GSD
 ```
 
 If you have already downloaded the repository, navigate to its root directory instead.
+
+Run the remaining commands from this directory. The YOLOv5 source code and requirements file are located under `src/YOLOv5-GSD/`.
+
+Pretrained model weights download automatically from [fluids/models](https://github.com/fluids/models) when needed. An internet connection is required for the initial download.
 
 ## Step 4: Install PyTorch
 
@@ -55,7 +59,7 @@ Choose the option corresponding to the environment created in Step 1.
 ### Option A: CPU — Example: Intel Core i9 on Ubuntu 20.04
 
 ```bash
-python -m pip install torch==1.11.0 torchvision==0.12.0 --extra-index-url https://download.pytorch.org/whl/cpu
+python -m pip install torch==1.11.0+cpu torchvision==0.12.0+cpu --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
 ### Option B: GPU — Example: NVIDIA H100 on Rocky Linux 9.5
@@ -71,10 +75,10 @@ python -m pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index
 From the repository root, run:
 
 ```bash
-python -m pip install -r yolov5/requirements.txt
+python -m pip install -r src/YOLOv5-GSD/requirements.txt
 ```
 
-**Compatibility note:** The requirements file includes newer dependencies that may conflict with the older Python 3.8/PyTorch 1.11 CPU environment. Option A requires a separately tested requirements list.
+**Compatibility note:** The requirements file includes newer dependencies that may conflict with the older Python 3.8/PyTorch 1.11 CPU environment. Option A requires a separately tested requirements list. Installing dependencies may upgrade PyTorch; check the installed versions in Step 8.
 
 ## Step 6: Install additional integration packages
 
@@ -125,4 +129,4 @@ PY
 
 For a CPU installation, `CUDA available: False` is expected. For a GPU installation, run this check on a GPU-equipped compute node and confirm that the GPU is detected.
 
-Installation is complete. See [Run the Code](README.md#run-the-code) for instructions on running the demos.
+See [Run the Jupyter Notebook Demos](README.md#run-the-jupyter-notebook-demos) or [Run the Python Scripts](README.md#run-the-python-scripts) for instructions on running the demos.
