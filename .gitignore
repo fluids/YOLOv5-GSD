@@ -1,2 +1,3 @@
 
-/src/yolov5/models_trained/*.pt
+# Model weights are stored in fluids/models
+*.pt
