@@ -1,11 +1,12 @@
-import os, sys, pathlib
-sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
+import sys, os
+from pathlib import Path
+sys.path.insert(0, str(Path.cwd().parent / "src"))
 import AI4GSD
 
 ## Demo of code.
 if __name__ == "__main__":
     #%% Define working folder.
-    WorkDir = r'/home/chen200/F/VisionAI2'
+    WorkDir = r'/home/chen200/F/VisionAI2'    
     folders = ['IntelCoreI9_NoCut_12Filter',
                'IntelCoreI9_NoCut_12Filter_Run2',
                'IntelCoreI9_NoCut_12Filter_Run3']

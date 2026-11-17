@@ -1,5 +1,6 @@
-import os, sys, pathlib
-sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
+import sys, os
+from pathlib import Path
+sys.path.insert(0, str(Path.cwd().parent / "src"))
 import AI4GSD
 
 ## Demo of code.

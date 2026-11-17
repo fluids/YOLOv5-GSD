@@ -1,5 +1,38 @@
 import os, sys, pathlib, subprocess, shutil, time, re
 import pandas as pd
+from tqdm import tqdm
+from pathlib import Path
+from urllib.request import urlopen
+
+#%% Downloading the pre-trained model if not found in desired folder.
+def get_model(model_dir, model_url):
+    """Download a missing model and return its local path."""
+    model_dir = Path(model_dir)
+    
+    if model_dir.is_file() and model_dir.stat().st_size > 0: return model_dir
+    
+    model_dir.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = model_dir.with_suffix(model_dir.suffix + ".part")
+
+    with urlopen(model_url, timeout=60) as response, temp_path.open("wb") as f:
+        total = int(response.headers.get("Content-Length", 0)) or None
+
+        with tqdm(total=total, unit="B", unit_scale=True,
+                  desc=f"Downloading {model_dir.name}") as bar:
+            while chunk := response.read(1024 * 1024):
+                f.write(chunk)
+                bar.update(len(chunk))
+
+            if bar.n == 0 or (total is not None and bar.n != total):
+                raise IOError(f"Download empty or incomplete: {model_dir}")
+
+    temp_path.replace(model_dir)
+
+    if not model_dir.is_file() or model_dir.stat().st_size != bar.n:
+        raise IOError(f"Model was not successfully saved to: {model_dir}")
+
+    print(f"Model saved to: {model_dir}")
+    return model_dir
 
 #%% Loading a pre-trained YOLOv5 model to predict and output time.
 def yolov5_predict(img_dir,img_size=1280,conf=0.35,device='cpu',
@@ -18,7 +51,9 @@ def yolov5_predict(img_dir,img_size=1280,conf=0.35,device='cpu',
     
     CodeDir = str(pathlib.Path(__file__).resolve().parents[1])
     src_dir = os.path.join(CodeDir,'yolov5')
-    model_dir = os.path.join(src_dir,"models_trained/yolo_v5_best.pt")
+    model_dir = os.path.join(src_dir,"models_trained","yolo_v5_best.pt")
+    model_url = "https://media.githubusercontent.com/media/fluids/models/main/YOLOv5-GSD/yolo_v5_best.pt"
+    get_model(model_dir,model_url)
     
     csvname = 'Time_V3_' + foldername + '_' + model_name + '.csv'
     csvpath = os.path.join(img_dir,csvname)
