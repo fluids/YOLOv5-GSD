@@ -1,5 +1,7 @@
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
-"""Model validation metrics."""
+# YOLOv5 🚀 by Ultralytics, GPL-3.0 license
+"""
+Model validation metrics
+"""
 
 import numpy as np
 
@@ -7,70 +9,63 @@ from ..metrics import ap_per_class
 
 
 def fitness(x):
-    """Return model fitness as a weighted sum of box and mask metrics [P, R, mAP@0.5, mAP@0.5:0.95] with weights [0, 0,
-    0.1, 0.9] applied to each of the box and mask groups (x: [N, 8] array).
-    """
+    # Model fitness as a weighted combination of metrics
     w = [0.0, 0.0, 0.1, 0.9, 0.0, 0.0, 0.1, 0.9]
     return (x[:, :8] * w).sum(1)
 
 
 def ap_per_class_box_and_mask(
-    tp_m,
-    tp_b,
-    conf,
-    pred_cls,
-    target_cls,
-    plot=False,
-    save_dir=".",
-    names=(),
+        tp_m,
+        tp_b,
+        conf,
+        pred_cls,
+        target_cls,
+        plot=False,
+        save_dir=".",
+        names=(),
 ):
-    """Compute AP metrics for both boxes and masks given per-prediction true-positive arrays.
-
-    Args:
-        tp_m (np.ndarray): True positives for masks, shape (n, 10).
-        tp_b (np.ndarray): True positives for boxes, shape (n, 10).
-        conf (np.ndarray): Objectness values from 0-1, shape (n,).
-        pred_cls (np.ndarray): Predicted object classes, shape (n,).
-        target_cls (np.ndarray): True object classes, shape (m,).
-        plot (bool): Plot precision-recall curves.
-        save_dir (str | Path): Plot save directory.
-        names (dict | tuple): Class index to name mapping used for plot legends.
-
-    Returns:
-        (dict): {'boxes': {'p', 'r', 'ap', 'f1', 'ap_class'}, 'masks': {...}} metric dicts from `ap_per_class`.
     """
-    results_boxes = ap_per_class(
-        tp_b, conf, pred_cls, target_cls, plot=plot, save_dir=save_dir, names=names, prefix="Box"
-    )[2:]
-    results_masks = ap_per_class(
-        tp_m, conf, pred_cls, target_cls, plot=plot, save_dir=save_dir, names=names, prefix="Mask"
-    )[2:]
+    Args:
+        tp_b: tp of boxes.
+        tp_m: tp of masks.
+        other arguments see `func: ap_per_class`.
+    """
+    results_boxes = ap_per_class(tp_b,
+                                 conf,
+                                 pred_cls,
+                                 target_cls,
+                                 plot=plot,
+                                 save_dir=save_dir,
+                                 names=names,
+                                 prefix="Box")[2:]
+    results_masks = ap_per_class(tp_m,
+                                 conf,
+                                 pred_cls,
+                                 target_cls,
+                                 plot=plot,
+                                 save_dir=save_dir,
+                                 names=names,
+                                 prefix="Mask")[2:]
 
-    return {
+    results = {
         "boxes": {
             "p": results_boxes[0],
             "r": results_boxes[1],
             "ap": results_boxes[3],
             "f1": results_boxes[2],
-            "ap_class": results_boxes[4],
-        },
+            "ap_class": results_boxes[4]},
         "masks": {
             "p": results_masks[0],
             "r": results_masks[1],
             "ap": results_masks[3],
             "f1": results_masks[2],
-            "ap_class": results_masks[4],
-        },
-    }
+            "ap_class": results_masks[4]}}
+    return results
 
 
 class Metric:
-    """Computes performance metrics like precision, recall, F1 score, and average precision for model evaluation."""
 
     def __init__(self) -> None:
-        """Initializes performance metric attributes for precision, recall, F1 score, average precision, and class
-        indices.
-        """
         self.p = []  # (nc, )
         self.r = []  # (nc, )
         self.f1 = []  # (nc, )
@@ -80,35 +75,31 @@ class Metric:
     @property
     def ap50(self):
         """AP@0.5 of all classes.
-
-        Returns:
+        Return:
             (nc, ) or [].
         """
         return self.all_ap[:, 0] if len(self.all_ap) else []
 
     @property
     def ap(self):
-        """AP@0.5:0.95.
-
-        Returns:
-            (nc, ) or []
+        """AP@0.5:0.95
+        Return:
+            (nc, ) or [].
         """
         return self.all_ap.mean(1) if len(self.all_ap) else []
 
     @property
     def mp(self):
-        """Mean precision of all classes.
-
-        Returns:
+        """mean precision of all classes.
+        Return:
             float.
         """
         return self.p.mean() if len(self.p) else 0.0
 
     @property
     def mr(self):
-        """Mean recall of all classes.
-
-        Returns:
+        """mean recall of all classes.
+        Return:
             float.
         """
         return self.r.mean() if len(self.r) else 0.0
@@ -116,8 +107,7 @@ class Metric:
     @property
     def map50(self):
         """Mean AP@0.5 of all classes.
-
-        Returns:
+        Return:
             float.
         """
         return self.all_ap[:, 0].mean() if len(self.all_ap) else 0.0
@@ -125,32 +115,29 @@ class Metric:
     @property
     def map(self):
         """Mean AP@0.5:0.95 of all classes.
-
-        Returns:
+        Return:
             float.
         """
         return self.all_ap.mean() if len(self.all_ap) else 0.0
 
     def mean_results(self):
-        """Mean of results, return mp, mr, map50, map."""
+        """Mean of results, return mp, mr, map50, map"""
         return (self.mp, self.mr, self.map50, self.map)
 
     def class_result(self, i):
-        """Class-aware result, return p[i], r[i], ap50[i], ap[i]."""
+        """class-aware result, return p[i], r[i], ap50[i], ap[i]"""
         return (self.p[i], self.r[i], self.ap50[i], self.ap[i])
 
     def get_maps(self, nc):
-        """Calculates and returns mean Average Precision (mAP) for each class given number of classes `nc`."""
         maps = np.zeros(nc) + self.map
         for i, c in enumerate(self.ap_class_index):
             maps[c] = self.ap[i]
         return maps
 
     def update(self, results):
-        """Update the metric attributes from new results.
-
+        """
         Args:
-            results (tuple): (p, r, ap, f1, ap_class).
+            results: tuple(p, r, ap, f1, ap_class)
         """
         p, r, all_ap, f1, ap_class_index = results
         self.p = p
@@ -164,36 +151,29 @@ class Metrics:
     """Metric for boxes and masks."""
 
     def __init__(self) -> None:
-        """Initialize Metric objects for bounding boxes and masks to compute performance metrics."""
         self.metric_box = Metric()
         self.metric_mask = Metric()
 
     def update(self, results):
-        """Update box and mask metrics from new results.
-
+        """
         Args:
-            results (dict): {'boxes': {...}, 'masks': {...}} metric dicts from `ap_per_class_box_and_mask`.
+            results: Dict{'boxes': Dict{}, 'masks': Dict{}}
         """
         self.metric_box.update(list(results["boxes"].values()))
         self.metric_mask.update(list(results["masks"].values()))
 
     def mean_results(self):
-        """Computes and returns the mean results for both box and mask metrics by summing their individual means."""
         return self.metric_box.mean_results() + self.metric_mask.mean_results()
 
     def class_result(self, i):
-        """Returns the sum of box and mask metric results for a specified class index `i`."""
         return self.metric_box.class_result(i) + self.metric_mask.class_result(i)
 
     def get_maps(self, nc):
-        """Calculates and returns the sum of mean average precisions (mAPs) for both box and mask metrics for `nc`
-        classes.
-        """
         return self.metric_box.get_maps(nc) + self.metric_mask.get_maps(nc)
 
     @property
     def ap_class_index(self):
-        """Returns the class index for average precision, shared by both box and mask metrics."""
+        # boxes and masks have the same ap_class_index
         return self.metric_box.ap_class_index
 
 
@@ -216,8 +196,7 @@ KEYS = [
     "val/cls_loss",
     "x/lr0",
     "x/lr1",
-    "x/lr2",
-]
+    "x/lr2",]
 
 BEST_KEYS = [
     "best/epoch",
@@ -228,5 +207,4 @@ BEST_KEYS = [
     "best/precision(M)",
     "best/recall(M)",
     "best/mAP_0.5(M)",
-    "best/mAP_0.5:0.95(M)",
-]
+    "best/mAP_0.5:0.95(M)",]
