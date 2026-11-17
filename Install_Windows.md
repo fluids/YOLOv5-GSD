@@ -2,6 +2,8 @@
 
 This guide installs the Python environment and packages required to run the YOLOv5 demos on a Windows 11 computer using a CPU.
 
+Install [Git for Windows](https://git-scm.com/download/win) before cloning the repository. Model weights download automatically if they are missing locally, so Git LFS is not required. An internet connection is required for the initial model download.
+
 ## Step 0 · Install Anaconda
 
 Skip this step if Anaconda is already installed.
@@ -48,18 +50,17 @@ Navigate to the directory where you want to store the code. For example:
 cd "D:\"
 ```
 
-Download the custom YOLOv5 repository and its pretrained model weights:
+Download the customized [YOLOv5-GSD repository](https://github.com/fluids/YOLOv5-GSD):
 
 ```powershell
-git lfs install
-git clone https://github.com/fluids/yolov5.git
-cd yolov5
+git clone https://github.com/fluids/YOLOv5-GSD.git
+cd YOLOv5-GSD
 ```
 
-Install the dependencies:
+From the repository root, install the dependencies in `src/YOLOv5-GSD/requirements.txt`:
 
 ```powershell
-python -m pip install -r yolov5/requirements.txt
+python -m pip install -r src/YOLOv5-GSD/requirements.txt
 ```
 
 If the repository is already downloaded, navigate directly to its root directory and run the dependency installation command.
@@ -95,4 +96,4 @@ python -c "import torch, torchvision, cv2, numpy, pandas, matplotlib; print('PyT
 
 For this CPU installation, `CUDA available: False` is expected.
 
-After verification succeeds, see [Run the Code](README.md#run-the-code) for instructions on running the demos.
+After verification succeeds, see [Run the Jupyter Notebook Demos](README.md#run-the-jupyter-notebook-demos) or [Run the Python Scripts](README.md#run-the-python-scripts) for instructions on running the demos.
