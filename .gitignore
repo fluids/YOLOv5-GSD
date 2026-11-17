@@ -1,3 +1,6 @@
+# Python caches
+__pycache__/
+*.py[cod]
 
 # Model weights are stored in fluids/models
 *.pt
