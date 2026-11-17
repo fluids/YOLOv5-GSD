@@ -122,7 +122,7 @@ Please cite the model paper and the relevant image datasets when reusing these m
 
 Chen, Y., et al. (2024). Quantifying streambed grain size, uncertainty, and hydrobiogeochemical parameters using machine learning model YOLO. *Water Resources Research*, 60, e2023WR036456. https://doi.org/10.1029/2023WR036456
 
-The demo notebooks provide additional source references. This project incorporates [Ultralytics YOLOv5](https://github.com/ultralytics/yolov5); its bundled license is available in [yolov5/LICENSE](yolov5/LICENSE). Local helper source headers contain additional usage and license statements; contact the author for clarification of terms covering those files.
+The demo notebooks provide additional source references. This project incorporates [Ultralytics YOLOv5](https://github.com/ultralytics/yolov5); its bundled license is available in [src/yolov5/LICENSE](yolov5/LICENSE). Local helper source headers contain additional usage and license statements; contact the author for clarification of terms covering those files.
 
 ## Contact
 
