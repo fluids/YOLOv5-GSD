@@ -346,7 +346,6 @@ class LoadImages:
         self.auto = auto
         self.transforms = transforms  # optional
         self.vid_stride = vid_stride  # video frame-rate stride
-        self.load_time = None
         if any(videos):
             self._new_video(videos[0])  # new video
         else:
@@ -365,17 +364,13 @@ class LoadImages:
         if self.count == self.nf:
             raise StopIteration
         path = self.files[self.count]
-        self.load_time = None
 
         if self.video_flag[self.count]:
             # Read video
             self.mode = "video"
-            t0 = time.perf_counter()
             for _ in range(self.vid_stride):
                 self.cap.grab()
             ret_val, im0 = self.cap.retrieve()
-            self.load_time = time.perf_counter() - t0
-            
             while not ret_val:
                 self.count += 1
                 self.cap.release()
@@ -383,9 +378,7 @@ class LoadImages:
                     raise StopIteration
                 path = self.files[self.count]
                 self._new_video(path)
-                t0 = time.perf_counter()
                 ret_val, im0 = self.cap.read()
-                self.load_time = time.perf_counter() - t0
 
             self.frame += 1
             # im0 = self._cv2_rotate(im0)  # for use if cv2 autorotation is False
@@ -394,9 +387,7 @@ class LoadImages:
         else:
             # Read image
             self.count += 1
-            t0 = time.perf_counter()
             im0 = cv2.imread(path)  # BGR
-            self.load_time = time.perf_counter() - t0
             assert im0 is not None, f"Image Not Found {path}"
             s = f"image {self.count}/{self.nf} {path}: "
 
