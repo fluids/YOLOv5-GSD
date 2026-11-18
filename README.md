@@ -14,7 +14,7 @@ Converting the detected bounding boxes to physical grain sizes and calculating g
 | [Demo_Python_Release](Demo_Python_Release) | Python script equivalents of the four notebooks. |
 | [src/AI4GSD](src/AI4GSD) | Supporting functions, including `yolov5_predict()`, and utilities adapted from [AI4GSD](https://github.com/pnnl/AI4GSD). |
 | [src/yolov5](src/yolov5) | Ultralytics YOLOv5 source code with custom modifications. |
-| [src/yolov5/models_trained/yolo_v5_best.pt]([yolov5/models_trained](https://github.com/fluids/models/tree/main/YOLOv5-GSD/yolo_v5_best.pt) | Pretrained M0c model weights described in [Chen et al. (2024)](https://doi.org/10.1029/2023WR036456). |
+| [src/yolov5/models_trained/yolo_v5_best.pt](https://github.com/fluids/models/tree/main/YOLOv5-GSD/yolo_v5_best.pt) | Pretrained M0c model weights described in [Chen et al. (2024)](https://doi.org/10.1029/2023WR036456). |
 | [Install_Linux.md](Install_Linux.md) | Installation instructions for CPU use on Ubuntu 20.04 and GPU use on Rocky Linux 9.5. |
 | [Install_Windows.md](Install_Windows.md) | Installation instructions for CPU use on Windows. |
 
