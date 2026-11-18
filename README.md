@@ -1,4 +1,4 @@
-# YOLOv5 for Stream Grain Detection and Runtime Benchmark
+# YOLOv5 for Stream Grain Detection Benchmark
 
 This repository provides Python scripts and Jupyter notebooks for detecting streambed sediment grains using the pretrained **M0c YOLOv5 model** described in [Chen et al. (2024)](https://doi.org/10.1029/2023WR036456). 
 
