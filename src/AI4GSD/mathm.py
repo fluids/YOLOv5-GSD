@@ -42,8 +42,7 @@ def numCount(A, tol=0):
     val = A[st]
     return st, na, val
 
-#%% This function calcualtes the empirical cumulative distribution function   #
-# This function generates results identical to the ecdf in Matlab and         #
+#%% This function generates results identical to the ecdf in Matlab and       #
 # ecdfm2 function under Basics folder. y is requried as N*1 or N*M            #
 # The by area algorithm is P(X) = sum(a(x<X))/sum(a) with a and x denoting    #
 # the area and size of each value. X is the unique values in x.               #
@@ -62,7 +61,7 @@ def ecdfm(y,option='bycount',tol=0):
         if y.ndim == 1:
             raise 'Area data not found for by area cumulative distribution .'
         else:
-            y = np.sort(y, axis=0)
+            y = y[np.argsort(y[:, 0], kind='stable')]
             st, na, val = numCount(y[:, 0],tol)
             area_sum = np.zeros(len(st), dtype=float)
             single_occ_mask = (na == 1)
@@ -459,20 +458,29 @@ if __name__ == "__main__":
         [0.4, 0.07]
     ])
     y2 = np.array([0.2,0.1,0.1,0.3,0.4])
+    y3 = np.array([1,1,1,2,2,3,3,4,5,6,7,8,9])
     
-    # y3 = np.array([1,1,1,2,2,3,3,4,5,6,7,8,9])
+    y5 = np.array([
+        [0.2, 0.03],
+        [0.1, 0.04],
+        [0.1, 0.01],
+        [0.3, 0.05],
+        [0.4, 0.02]
+        ])
 
-    # f1,x1,area1 = ecdfm(y3)
+    #f1,x1,area1 = ecdfm(y1)
     # print(np.median(y3))
     # print(np.percentile(y3,50))
     # dbc = np.interp(0.5,f1,x1)
     # print(dbc)                        
     
     # # f2,x2,area2 = ecdfm(y2)
-    # # f4,x4,area4 = ecdfm(y1,'byarea')
+    f4,x4,area4 = ecdfm(y1,'byarea')
+    f5,x5,area5 = ecdfm(y5,'byarea')
+
     # # print(f1,x1,area1)
     # # print(f2,x2,area2)
-    # # print(f4,x4,area4)
+    print(f4,x4,area4)
     
     # # Example usage for element-wise comparison:
     # A_elem = [1.0, 2.001, 3.0]
