@@ -75,7 +75,7 @@ python -m pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index
 From the repository root, run:
 
 ```bash
-python -m pip install -r src/YOLOv5-GSD/requirements.txt
+python -m pip install -r src/yolov5/requirements.txt
 ```
 
 **Compatibility note:** The requirements file includes newer dependencies that may conflict with the older Python 3.8/PyTorch 1.11 CPU environment. Option A requires a separately tested requirements list. Installing dependencies may upgrade PyTorch; check the installed versions in Step 8.
