@@ -60,7 +60,7 @@ cd YOLOv5-GSD
 From the repository root, install the dependencies in `src/YOLOv5-GSD/requirements.txt`:
 
 ```powershell
-python -m pip install -r src/YOLOv5-GSD/requirements.txt
+python -m pip install -r src/yolov5/requirements.txt
 ```
 
 If the repository is already downloaded, navigate directly to its root directory and run the dependency installation command.
