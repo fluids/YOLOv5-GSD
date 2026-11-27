@@ -83,7 +83,7 @@ python -m pip install -r src/yolov5/requirements.txt
 ## Step 6: Install additional integration packages
 
 ```bash
-python -m pip install natsort pyproj
+python -m pip install natsort pyproj papermill
 ```
 
 ## Step 7: Install Jupyter Notebook
