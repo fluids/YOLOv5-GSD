@@ -6,7 +6,7 @@ import AI4GSD
 ## Demo of code.
 if __name__ == "__main__":
     #%% Define working folder.
-    WorkDir = r'/home/chen200/F/VisionAI2'    
+    WorkDir = r'/home/chen200/F/VisionAI'    
     folders = ['IntelCoreI9_NoCut_12Filter',
                'IntelCoreI9_NoCut_12Filter_Run2',
                'IntelCoreI9_NoCut_12Filter_Run3']
@@ -35,7 +35,9 @@ if __name__ == "__main__":
                 device=device,
                 save_overlay=save_overlay,
                 line_thickness = line_thickness,
-                hide_conf=hide_conf
+                hide_conf=hide_conf,
+                label_dir='BeforeThreshold',
                 )
+            print('')
             
     #%% End.

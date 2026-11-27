@@ -99,6 +99,7 @@ def run(
     half=False,  # use FP16 half-precision inference
     dnn=False,  # use OpenCV DNN for ONNX inference
     vid_stride=1,  # video frame-rate stride
+    label_dir="labels",  # subdirectory to save label files
 ):
     """Runs YOLOv5 detection inference on various sources like images, videos, directories, streams, etc.
 
@@ -114,10 +115,10 @@ def run(
         device (str): CUDA device identifier (e.g., '0' or '0,1,2,3') or 'cpu'. Default is an empty string, which uses
             the best available device.
         view_img (bool): If True, display inference results using OpenCV. Default is False.
-        save_txt (bool): If True, save results in a text file. Default is False.
-        save_format (int): Save boxes in YOLO (0) or Pascal-VOC (1) format when save_txt is set. Default is 0.
+        save_txt (bool): If True, save YOLO, all-fields, and class-confidence text files. Default is False.
+        save_format (int): Coordinate format in the all-fields file: YOLO (0) or Pascal-VOC (1). Default is 0.
         save_csv (bool): If True, save results in a CSV file. Default is False.
-        save_conf (bool): If True, include confidence scores in the saved results. Default is False.
+        save_conf (bool): Retained for compatibility; confidence is always written to the all-fields file.
         save_crop (bool): If True, save cropped prediction boxes. Default is False.
         nosave (bool): If True, do not save inference images or videos. Default is False.
         classes (list[int]): List of class indices to filter detections by. Default is None.
@@ -129,6 +130,7 @@ def run(
         name (str): Name of the current experiment; used to create a subdirectory within 'project'. Default is 'exp'.
         exist_ok (bool): If True, existing directories with the same name are reused instead of being incremented.
             Default is False.
+        label_dir (str): Subdirectory within the run output directory for label files. Default is 'labels'.
         line_thickness (int): Thickness of bounding box lines in pixels. Default is 3.
         hide_labels (bool): If True, do not display labels on bounding boxes. Default is False.
         hide_conf (bool): If True, do not display confidence scores on bounding boxes. Default is False.
@@ -168,7 +170,8 @@ def run(
 
     # Directories
     save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
-    (save_dir / "labels" if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
+    labels_path = save_dir / label_dir
+    (labels_path if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
 
     # Load model
     device = select_device(device)
@@ -177,7 +180,7 @@ def run(
     imgsz = check_img_size(imgsz, s=stride)  # check image size
     
     if save_txt:
-        class_path = save_dir / "labels" / "classes.txt"
+        class_path = labels_path / "classes.txt"
         with open(class_path, "w") as f:
             for i in sorted(names):
                 f.write(f"{names[i]}\n")
@@ -211,6 +214,7 @@ def run(
     model.warmup(imgsz=(1 if pt or model.triton else bs, 3, *imgsz))  # warmup
     seen, windows, dt = 0, [], (Profile(device=device), Profile(device=device), Profile(device=device))
     load_times = []
+    saved_label_stems = set()
     for path, im, im0s, vid_cap, s in dataset:
         if isinstance(dataset, LoadImages):
             tload = dataset.load_time if dataset.load_time is not None else -9999
@@ -256,7 +260,7 @@ def run(
 
             p = Path(p)  # to Path
             save_path = str(save_dir / p.name)  # im.jpg
-            txt_path = str(save_dir / "labels" / p.stem) + ("" if dataset.mode == "image" else f"_{frame}")  # im.txt
+            txt_path = str(labels_path / p.stem) + ("" if dataset.mode == "image" else f"_{frame}")  # im.txt
             s += "{:g}x{:g} ".format(*im.shape[2:])  # print string
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
             imc = im0.copy() if save_crop else im0  # for save_crop
@@ -281,15 +285,23 @@ def run(
                         write_to_csv(p.name, label, confidence_str)
 
                     if save_txt:  # Write to file
-                        if save_format == 0:
-                            coords = (
-                                (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()
-                            )  # normalized xywh
-                        else:
-                            coords = (torch.tensor(xyxy).view(1, 4) / gn).view(-1).tolist()  # xyxy
-                        line = (cls, *coords, conf) if save_conf else (cls, *coords)  # label format
-                        with open(f"{txt_path}.txt", "a") as f:
-                            f.write(("%g " * len(line)).rstrip() % line + "\n")
+                        saved_label_stems.add(Path(txt_path).name)
+                        xywh = (
+                            xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn
+                        ).view(-1).tolist()
+                        all_coords = (
+                            xywh
+                            if save_format == 0
+                            else (torch.tensor(xyxy).view(1, 4) / gn).view(-1).tolist()
+                        )
+                        label_files = (
+                            (f"{txt_path}.txt", (cls, *xywh)),
+                            (f"{txt_path}_a.txt", (cls, *all_coords, conf)),
+                            (f"{txt_path}_p.txt", (cls, conf)),
+                        )
+                        for label_file, line in label_files:
+                            with open(label_file, "a") as f:
+                                f.write(("%g " * len(line)).rstrip() % line + "\n")
 
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
@@ -358,7 +370,8 @@ def run(
     #LOGGER.info(f"Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {(1, 3, *imgsz)}" % t)
     LOGGER.info(f"Speed: %.1fms image-load, %.1fms pre-process, %.1fms inference, %.1fms NMS, %.1fms total per image at shape {(1, 3, *imgsz)}"% t)
     if save_txt or save_img:
-        s = f"\n{len(list(save_dir.glob('labels/*.txt')))} labels saved to {save_dir / 'labels'}" if save_txt else ""
+        label_count = len(saved_label_stems)
+        s = f"\n{label_count} labels saved to {labels_path}" if save_txt else ""
         LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
     if update:
         strip_optimizer(
@@ -379,7 +392,8 @@ def parse_opt():
         --max-det (int, optional): Maximum number of detections per image. Defaults to 1000.
         --device (str, optional): CUDA device, i.e., '0' or '0,1,2,3' or 'cpu'. Defaults to "".
         --view-img (bool, optional): Flag to display results. Defaults to False.
-        --save-txt (bool, optional): Flag to save results to *.txt files. Defaults to False.
+        --save-txt (bool, optional): Save YOLO, all-fields, and class-confidence label files. Defaults to False.
+        --label-dir (str, optional): Subdirectory for saved label files. Defaults to 'labels'.
         --save-format (int): Save boxes in YOLO (0) or Pascal-VOC (1) format when --save-txt is set. Defaults to 0.
         --save-csv (bool, optional): Flag to save results in CSV format. Defaults to False.
         --save-conf (bool, optional): Flag to save confidences in labels saved via --save-txt. Defaults to False.
@@ -422,14 +436,15 @@ def parse_opt():
     parser.add_argument("--device", default="", help="cuda device, i.e. 0 or 0,1,2,3 or cpu")
     parser.add_argument("--view-img", action="store_true", help="show results")
     parser.add_argument("--save-txt", action="store_true", help="save results to *.txt")
+    parser.add_argument("--label-dir", default="labels", help="subdirectory for saved label files")
     parser.add_argument(
         "--save-format",
         type=int,
         default=0,
-        help="whether to save boxes coordinates in YOLO format or Pascal-VOC format when save-txt is True, 0 for YOLO and 1 for Pascal-VOC",
+        help="coordinate format in *_a.txt: 0 for normalized YOLO xywh, 1 for normalized Pascal-VOC xyxy",
     )
     parser.add_argument("--save-csv", action="store_true", help="save results in CSV format")
-    parser.add_argument("--save-conf", action="store_true", help="save confidences in --save-txt labels")
+    parser.add_argument("--save-conf", action="store_true", help="retained for compatibility; confidence is always saved in *_a.txt")
     parser.add_argument("--save-crop", action="store_true", help="save cropped prediction boxes")
     parser.add_argument("--nosave", action="store_true", help="do not save images/videos")
     parser.add_argument("--classes", nargs="+", type=int, help="filter by class: --classes 0, or --classes 0 2 3")

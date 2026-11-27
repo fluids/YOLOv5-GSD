@@ -39,7 +39,8 @@ def yolov5_predict(img_dir,img_size=1280,conf=0.35,device='cpu',
                       save_overlay=False, model_name='YOLOv5.0.0',
                       hide_conf = True, save_folder='grains_predicts',
                       foldername_save=None,line_thickness=2,overwrite=False,
-                      max_det=10000,hide_class=True,write_time_only=False):
+                      max_det=10000,hide_class=True,write_time_only=False,
+                      label_dir='labels'):
     
     ts1 = time.time()
     foldername = os.path.basename(img_dir)
@@ -47,7 +48,7 @@ def yolov5_predict(img_dir,img_size=1280,conf=0.35,device='cpu',
     if foldername_save is None:
         foldername_save = foldername + '_' + model_name + '_' + "{:.0f}".format(conf*100)
     output_dir = os.path.join(img_dir, save_folder, foldername_save)
-    label_dir = os.path.join(output_dir, "labels")
+    labels_path = os.path.join(output_dir, label_dir)
     
     CodeDir = str(pathlib.Path(__file__).resolve().parents[1])
     src_dir = os.path.join(CodeDir,'yolov5')
@@ -62,12 +63,16 @@ def yolov5_predict(img_dir,img_size=1280,conf=0.35,device='cpu',
                 'Preprocess_time_seconds', 'Inference_time_seconds',
                 'Postprocess_time_seconds', 'Total_time_seconds']
     
-    # Checking if exists and overwrite.
-    if os.path.exists(label_dir) and os.path.isfile(csvpath) and not overwrite:
+    # Checking if exists and overwrite. Overwrite only applies to saved predictions,
+    # not time-only runs, so write_time_only cannot remove existing label folders.
+    # For normal prediction, reuse existing labels and timing data unless overwrite is requested.
+    # For time-only runs, always measure again, but never delete or recreate prediction data.
+    if not write_time_only and os.path.exists(labels_path) and os.path.isfile(csvpath) and not overwrite:
         print('Founding existing labels, skipping...')
         sts_df = pd.read_csv(csvpath)
     else:
-        if os.path.exists(label_dir): shutil.rmtree(label_dir)                 # Remove existing labels.
+        if not write_time_only and overwrite and os.path.exists(labels_path):
+            shutil.rmtree(labels_path)             # Remove existing labels for a normal overwrite.
         cmd = [
             sys.executable,
             os.path.join(src_dir, "detect_timeinfo.py"),
@@ -82,6 +87,7 @@ def yolov5_predict(img_dir,img_size=1280,conf=0.35,device='cpu',
             "--project", os.path.join(img_dir, save_folder),
             "--name", foldername_save,
             "--line-thickness", str(line_thickness),
+            "--label-dir", label_dir,
             "--exist-ok"
         ]
         # Option 2 only write time, but not save any results.
@@ -97,6 +103,7 @@ def yolov5_predict(img_dir,img_size=1280,conf=0.35,device='cpu',
             "--project", os.path.join(img_dir, save_folder),
             "--name", foldername_save,
             "--line-thickness", str(line_thickness),
+            "--label-dir", label_dir,
             "--exist-ok",
             "--nosave",                                                        # Do not save prediction images
         ]
