@@ -1,4 +1,5 @@
 # Python caches
+/src/AI4GSD/**/__pycache__/
 __pycache__
 *.py[cod]
 
