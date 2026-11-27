@@ -68,7 +68,7 @@ If the repository is already downloaded, navigate directly to its root directory
 ## Step 6 · Install additional integration packages
 
 ```powershell
-python -m pip install natsort pyproj
+python -m pip install natsort pyproj papermill
 ```
 
 ## Step 7 · Install Jupyter Notebook
