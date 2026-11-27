@@ -37,7 +37,7 @@ conda activate yolov5
 
 Activate this environment whenever you open a new terminal to use YOLOv5.
 
-## Step 3: Download the repository
+## Step 3: Download the repository to desired directory
 
 Clone the customized [YOLOv5-GSD repository](https://github.com/fluids/YOLOv5-GSD):
 
