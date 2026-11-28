@@ -1,0 +1,192 @@
+============================================================
+Environment information
+============================================================
+Conda environment: yolov5
+CONDA_PREFIX: /people/chen200/Computation/Anaconda/anaconda3/envs/yolov5
+Running on host: h100-07
+SLURM_JOB_ID: 1668770
+SLURM_NODELIST: h100-07
+Python executable: /people/chen200/Computation/Anaconda/anaconda3/envs/yolov5/bin/python
+Starting all GPU demos at: Thu Nov 26 08:49:30 PM PST 2026
+Number of demos: 2
+============================================================
+GPU status
+============================================================
+index, name, utilization.gpu [%], memory.used [MiB], memory.total [MiB], temperature.gpu, pstate
+0, NVIDIA H100 80GB HBM3, 0 %, 0 MiB, 81559 MiB, 36, P0
+CUDA available: True
+CUDA device: NVIDIA H100 80GB HBM3
+============================================================
+Task id: 0
+Script: Demo0_yolov5_predictions_H100.py
+Log file: Demo0_yolov5_predictions_H100.log
+Starting task 0 at: Thu Nov 26 08:49:33 PM PST 2026
+============================================================
+Master folder: NvidiaH100_NoCut_12Filter
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 16.31 seconds
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 15.12 seconds
+Processing 20260430_MairD2026IG2_APF2 in 9.38 seconds
+Processing 20260430_MairD2026IG2_AR in 6.87 seconds
+Processing 20260430_MairD2026IG2_FH2 in 6.58 seconds
+Processing 20260430_MairD2026IG2_HP in 8.46 seconds
+Processing 20260430_MairD2026IG2_JF in 8.10 seconds
+Processing 20260430_MairD2026IG2_NB2 in 9.35 seconds
+Processing 20260430_MairD2026IG2_NZ1 in 7.47 seconds
+Processing 20260430_MairD2026IG2_NZ2 in 7.44 seconds
+Processing 20260430_MairD2026IG2_PR in 7.30 seconds
+Processing 20260430_MairD2026IG2_S12 in 9.06 seconds
+Processing 20260430_YC_YRBCRBWAUSA in 76.47 seconds
+
+Master folder: NvidiaH100_NoCut_12Filter_Run2
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 21.18 seconds
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 17.31 seconds
+Processing 20260430_MairD2026IG2_APF2 in 8.66 seconds
+Processing 20260430_MairD2026IG2_AR in 6.89 seconds
+Processing 20260430_MairD2026IG2_FH2 in 6.58 seconds
+Processing 20260430_MairD2026IG2_HP in 8.72 seconds
+Processing 20260430_MairD2026IG2_JF in 6.47 seconds
+Processing 20260430_MairD2026IG2_NB2 in 8.66 seconds
+Processing 20260430_MairD2026IG2_NZ1 in 7.11 seconds
+Processing 20260430_MairD2026IG2_NZ2 in 7.37 seconds
+Processing 20260430_MairD2026IG2_PR in 7.17 seconds
+Processing 20260430_MairD2026IG2_S12 in 7.68 seconds
+Processing 20260430_YC_YRBCRBWAUSA in 77.26 seconds
+
+Master folder: NvidiaH100_NoCut_12Filter_Run3
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 16.29 seconds
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 16.11 seconds
+Processing 20260430_MairD2026IG2_APF2 in 8.67 seconds
+Processing 20260430_MairD2026IG2_AR in 6.95 seconds
+Processing 20260430_MairD2026IG2_FH2 in 6.60 seconds
+Processing 20260430_MairD2026IG2_HP in 7.84 seconds
+Processing 20260430_MairD2026IG2_JF in 7.31 seconds
+Processing 20260430_MairD2026IG2_NB2 in 8.73 seconds
+Processing 20260430_MairD2026IG2_NZ1 in 7.06 seconds
+Processing 20260430_MairD2026IG2_NZ2 in 7.45 seconds
+Processing 20260430_MairD2026IG2_PR in 7.34 seconds
+Processing 20260430_MairD2026IG2_S12 in 7.58 seconds
+Processing 20260430_YC_YRBCRBWAUSA in 78.02 seconds
+
+Master folder: NvidiaH100_0.1Cut_12Filter
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 16.18 seconds
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 15.94 seconds
+Processing 20260430_MairD2026IG2_APF2 in 8.69 seconds
+Processing 20260430_MairD2026IG2_AR in 6.82 seconds
+Processing 20260430_MairD2026IG2_FH2 in 6.59 seconds
+Processing 20260430_MairD2026IG2_HP in 8.01 seconds
+Processing 20260430_MairD2026IG2_JF in 7.37 seconds
+Processing 20260430_MairD2026IG2_NB2 in 8.54 seconds
+Processing 20260430_MairD2026IG2_NZ1 in 7.13 seconds
+Processing 20260430_MairD2026IG2_NZ2 in 7.34 seconds
+Processing 20260430_MairD2026IG2_PR in 7.16 seconds
+Processing 20260430_MairD2026IG2_S12 in 7.40 seconds
+Processing 20260430_YC_YRBCRBWAUSA in 68.38 seconds
+
+Master folder: NvidiaH100_NoCut_12Filter_SingleDiameter
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 17.11 seconds
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 16.24 seconds
+Processing 20260430_MairD2026IG2_APF2 in 8.49 seconds
+Processing 20260430_MairD2026IG2_AR in 6.88 seconds
+Processing 20260430_MairD2026IG2_FH2 in 6.68 seconds
+Processing 20260430_MairD2026IG2_HP in 7.47 seconds
+Processing 20260430_MairD2026IG2_JF in 7.33 seconds
+Processing 20260430_MairD2026IG2_NB2 in 8.86 seconds
+Processing 20260430_MairD2026IG2_NZ1 in 7.33 seconds
+Processing 20260430_MairD2026IG2_NZ2 in 7.41 seconds
+Processing 20260430_MairD2026IG2_PR in 7.09 seconds
+Processing 20260430_MairD2026IG2_S12 in 7.46 seconds
+Processing 20260430_YC_YRBCRBWAUSA in 65.46 seconds
+
+Finished task id 0 at: Thu Nov 26 09:04:48 PM PST 2026
+============================================================
+GPU status
+============================================================
+index, name, utilization.gpu [%], memory.used [MiB], memory.total [MiB], temperature.gpu, pstate
+0, NVIDIA H100 80GB HBM3, 0 %, 0 MiB, 81559 MiB, 38, P0
+CUDA available: True
+CUDA device: NVIDIA H100 80GB HBM3
+============================================================
+Task id: 1
+Script: Demo2_yolov5_time_only_H100.py
+Log file: Demo2_yolov5_time_only_H100.log
+Starting task 1 at: Thu Nov 26 09:04:50 PM PST 2026
+============================================================
+Master folder: NvidiaH100_NoCut_12Filter
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 6.89 seconds
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 6.37 seconds
+Processing 20260430_MairD2026IG2_APF2 in 6.49 seconds
+Processing 20260430_MairD2026IG2_AR in 6.31 seconds
+Processing 20260430_MairD2026IG2_FH2 in 6.26 seconds
+Processing 20260430_MairD2026IG2_HP in 6.37 seconds
+Processing 20260430_MairD2026IG2_JF in 6.29 seconds
+Processing 20260430_MairD2026IG2_NB2 in 6.56 seconds
+Processing 20260430_MairD2026IG2_NZ1 in 6.36 seconds
+Processing 20260430_MairD2026IG2_NZ2 in 6.86 seconds
+Processing 20260430_MairD2026IG2_PR in 6.75 seconds
+Processing 20260430_MairD2026IG2_S12 in 6.33 seconds
+Processing 20260430_YC_YRBCRBWAUSA in 12.69 seconds
+
+Master folder: NvidiaH100_NoCut_12Filter_Run2
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 6.42 seconds
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 6.36 seconds
+Processing 20260430_MairD2026IG2_APF2 in 6.48 seconds
+Processing 20260430_MairD2026IG2_AR in 6.33 seconds
+Processing 20260430_MairD2026IG2_FH2 in 6.29 seconds
+Processing 20260430_MairD2026IG2_HP in 6.79 seconds
+Processing 20260430_MairD2026IG2_JF in 6.74 seconds
+Processing 20260430_MairD2026IG2_NB2 in 6.57 seconds
+Processing 20260430_MairD2026IG2_NZ1 in 6.33 seconds
+Processing 20260430_MairD2026IG2_NZ2 in 6.38 seconds
+Processing 20260430_MairD2026IG2_PR in 6.31 seconds
+Processing 20260430_MairD2026IG2_S12 in 6.39 seconds
+Processing 20260430_YC_YRBCRBWAUSA in 12.75 seconds
+
+Master folder: NvidiaH100_NoCut_12Filter_Run3
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 6.37 seconds
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 6.82 seconds
+Processing 20260430_MairD2026IG2_APF2 in 6.89 seconds
+Processing 20260430_MairD2026IG2_AR in 6.31 seconds
+Processing 20260430_MairD2026IG2_FH2 in 6.25 seconds
+Processing 20260430_MairD2026IG2_HP in 6.33 seconds
+Processing 20260430_MairD2026IG2_JF in 6.25 seconds
+Processing 20260430_MairD2026IG2_NB2 in 6.64 seconds
+Processing 20260430_MairD2026IG2_NZ1 in 6.33 seconds
+Processing 20260430_MairD2026IG2_NZ2 in 6.38 seconds
+Processing 20260430_MairD2026IG2_PR in 6.30 seconds
+Processing 20260430_MairD2026IG2_S12 in 6.80 seconds
+Processing 20260430_YC_YRBCRBWAUSA in 13.02 seconds
+
+Master folder: NvidiaH100_0.1Cut_12Filter
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 6.35 seconds
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 6.33 seconds
+Processing 20260430_MairD2026IG2_APF2 in 6.47 seconds
+Processing 20260430_MairD2026IG2_AR in 6.31 seconds
+Processing 20260430_MairD2026IG2_FH2 in 6.26 seconds
+Processing 20260430_MairD2026IG2_HP in 6.32 seconds
+Processing 20260430_MairD2026IG2_JF in 6.26 seconds
+Processing 20260430_MairD2026IG2_NB2 in 6.98 seconds
+Processing 20260430_MairD2026IG2_NZ1 in 6.80 seconds
+Processing 20260430_MairD2026IG2_NZ2 in 6.39 seconds
+Processing 20260430_MairD2026IG2_PR in 6.30 seconds
+Processing 20260430_MairD2026IG2_S12 in 6.29 seconds
+Processing 20260430_YC_YRBCRBWAUSA in 11.72 seconds
+
+Master folder: NvidiaH100_NoCut_12Filter_SingleDiameter
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 6.35 seconds
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 6.43 seconds
+Processing 20260430_MairD2026IG2_APF2 in 6.47 seconds
+Processing 20260430_MairD2026IG2_AR in 6.77 seconds
+Processing 20260430_MairD2026IG2_FH2 in 6.74 seconds
+Processing 20260430_MairD2026IG2_HP in 6.36 seconds
+Processing 20260430_MairD2026IG2_JF in 6.31 seconds
+Processing 20260430_MairD2026IG2_NB2 in 6.63 seconds
+Processing 20260430_MairD2026IG2_NZ1 in 6.33 seconds
+Processing 20260430_MairD2026IG2_NZ2 in 6.40 seconds
+Processing 20260430_MairD2026IG2_PR in 6.36 seconds
+Processing 20260430_MairD2026IG2_S12 in 6.36 seconds
+Processing 20260430_YC_YRBCRBWAUSA in 12.63 seconds
+
+Finished task id 1 at: Thu Nov 26 09:12:22 PM PST 2026
+============================================================
+All GPU demos finished at: Thu Nov 26 09:12:22 PM PST 2026
+============================================================

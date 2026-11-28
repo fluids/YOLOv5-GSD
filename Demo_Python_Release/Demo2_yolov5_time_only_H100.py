@@ -30,6 +30,8 @@ if __name__ == "__main__":
                 device=device,
                 save_overlay=False,
                 write_time_only=True,
+                label_dir='BeforeThreshold',
                 )
+        print('')
             
     #%% End.

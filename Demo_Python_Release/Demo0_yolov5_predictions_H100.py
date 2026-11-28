@@ -37,7 +37,9 @@ if __name__ == "__main__":
                 device=device,
                 save_overlay=save_overlay,
                 line_thickness = line_thickness,
-                hide_conf=hide_conf
+                hide_conf=hide_conf,
+                label_dir='BeforeThreshold',
                 )
+        print('')
             
     #%% End.

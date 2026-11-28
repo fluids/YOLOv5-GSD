@@ -1,0 +1,160 @@
+Input Notebook:  Demo2_yolov5_time_only_H100.ipynb
+Output Notebook: Demo2_yolov5_time_only_H100.executed.ipynb
+Executing notebook with kernel: python3
+Executing Cell 1---------------------------------------
+Ending Cell 1------------------------------------------
+Executing Cell 2---------------------------------------
+Ending Cell 2------------------------------------------
+Executing Cell 3---------------------------------------
+Ending Cell 3------------------------------------------
+Executing Cell 4---------------------------------------
+Ending Cell 4------------------------------------------
+Executing Cell 5---------------------------------------
+Ending Cell 5------------------------------------------
+Executing Cell 6---------------------------------------
+Ending Cell 6------------------------------------------
+Executing Cell 7---------------------------------------
+Ending Cell 7------------------------------------------
+Executing Cell 8---------------------------------------
+Master folder: NvidiaH100_NoCut_12Filter
+
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 7.38 seconds
+
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 6.67 seconds
+
+Processing 20260430_MairD2026IG2_APF2 in 6.71 seconds
+
+Processing 20260430_MairD2026IG2_AR in 6.53 seconds
+
+Processing 20260430_MairD2026IG2_FH2 in 6.52 seconds
+
+Processing 20260430_MairD2026IG2_HP in 6.67 seconds
+
+Processing 20260430_MairD2026IG2_JF in 6.81 seconds
+
+Processing 20260430_MairD2026IG2_NB2 in 6.88 seconds
+
+Processing 20260430_MairD2026IG2_NZ1 in 6.66 seconds
+
+Processing 20260430_MairD2026IG2_NZ2 in 7.52 seconds
+
+Processing 20260430_MairD2026IG2_PR in 6.59 seconds
+
+Processing 20260430_MairD2026IG2_S12 in 6.53 seconds
+
+Processing 20260430_YC_YRBCRBWAUSA in 13.20 seconds
+
+Master folder: NvidiaH100_NoCut_12Filter_Run2
+
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 6.55 seconds
+
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 6.56 seconds
+
+Processing 20260430_MairD2026IG2_APF2 in 6.66 seconds
+
+Processing 20260430_MairD2026IG2_AR in 6.67 seconds
+
+Processing 20260430_MairD2026IG2_FH2 in 7.36 seconds
+
+Processing 20260430_MairD2026IG2_HP in 6.55 seconds
+
+Processing 20260430_MairD2026IG2_JF in 6.50 seconds
+
+Processing 20260430_MairD2026IG2_NB2 in 6.79 seconds
+
+Processing 20260430_MairD2026IG2_NZ1 in 6.54 seconds
+
+Processing 20260430_MairD2026IG2_NZ2 in 6.59 seconds
+
+Processing 20260430_MairD2026IG2_PR in 6.50 seconds
+
+Processing 20260430_MairD2026IG2_S12 in 6.56 seconds
+
+Processing 20260430_YC_YRBCRBWAUSA in 13.47 seconds
+
+Master folder: NvidiaH100_NoCut_12Filter_Run3
+
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 7.47 seconds
+
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 6.59 seconds
+
+Processing 20260430_MairD2026IG2_APF2 in 6.69 seconds
+
+Processing 20260430_MairD2026IG2_AR in 6.59 seconds
+
+Processing 20260430_MairD2026IG2_FH2 in 6.72 seconds
+
+Processing 20260430_MairD2026IG2_HP in 6.72 seconds
+
+Processing 20260430_MairD2026IG2_JF in 6.56 seconds
+
+Processing 20260430_MairD2026IG2_NB2 in 6.88 seconds
+
+Processing 20260430_MairD2026IG2_NZ1 in 6.55 seconds
+
+Processing 20260430_MairD2026IG2_NZ2 in 7.43 seconds
+
+Processing 20260430_MairD2026IG2_PR in 6.49 seconds
+
+Processing 20260430_MairD2026IG2_S12 in 6.54 seconds
+
+Processing 20260430_YC_YRBCRBWAUSA in 14.61 seconds
+
+Master folder: NvidiaH100_0.1Cut_12Filter
+
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 6.60 seconds
+
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 6.59 seconds
+
+Processing 20260430_MairD2026IG2_APF2 in 6.79 seconds
+
+Processing 20260430_MairD2026IG2_AR in 6.56 seconds
+
+Processing 20260430_MairD2026IG2_FH2 in 7.96 seconds
+
+Processing 20260430_MairD2026IG2_HP in 7.21 seconds
+
+Processing 20260430_MairD2026IG2_JF in 6.57 seconds
+
+Processing 20260430_MairD2026IG2_NB2 in 6.78 seconds
+
+Processing 20260430_MairD2026IG2_NZ1 in 6.52 seconds
+
+Processing 20260430_MairD2026IG2_NZ2 in 6.71 seconds
+
+Processing 20260430_MairD2026IG2_PR in 6.54 seconds
+
+Processing 20260430_MairD2026IG2_S12 in 6.68 seconds
+
+Processing 20260430_YC_YRBCRBWAUSA in 13.22 seconds
+
+Master folder: NvidiaH100_NoCut_12Filter_SingleDiameter
+
+Processing 20250916_DetertM2012_FieldValidateBaseGrain in 7.46 seconds
+
+Processing 20250916_MairD2024_FieldValidateMair2024K1 in 6.60 seconds
+
+Processing 20260430_MairD2026IG2_APF2 in 6.72 seconds
+
+Processing 20260430_MairD2026IG2_AR in 6.59 seconds
+
+Processing 20260430_MairD2026IG2_FH2 in 6.48 seconds
+
+Processing 20260430_MairD2026IG2_HP in 6.57 seconds
+
+Processing 20260430_MairD2026IG2_JF in 6.62 seconds
+
+Processing 20260430_MairD2026IG2_NB2 in 7.00 seconds
+
+Processing 20260430_MairD2026IG2_NZ1 in 6.94 seconds
+
+Processing 20260430_MairD2026IG2_NZ2 in 7.95 seconds
+
+Processing 20260430_MairD2026IG2_PR in 6.54 seconds
+
+Processing 20260430_MairD2026IG2_S12 in 6.60 seconds
+
+Processing 20260430_YC_YRBCRBWAUSA in 13.44 seconds
+
+
+Ending Cell 8------------------------------------------
